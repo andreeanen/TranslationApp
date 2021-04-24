@@ -1,0 +1,6 @@
+﻿@model TranslationApplication.Models.Wordlist
+<h1>My wordlist</h1>
+
+<p>@Model.Title</p>
+
+<a asp-controller="Wordlist" asp-action="AddWordToList" asp-route-id="@Model.Id" class="btn my-button btn-lg btn-success float-right ">Add new word</a>

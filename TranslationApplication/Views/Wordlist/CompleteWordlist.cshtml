@@ -1,0 +1,16 @@
+﻿@model TranslationApplication.Models.Wordlist
+
+<p>Complete Wordlist</p>
+
+<p>@Model.Title</p>
+
+<a asp-controller="Wordlist" asp-action="AddWordToList" asp-route-id="@Model.Id" class="btn my-button btn-lg btn-success">Add new word</a>
+
+@foreach (var word in Model.Words)
+{
+<div>
+    @word.Word1 = @word.Word2
+    <a asp-action="Edit" asp-route-id="@word.Id" class="btn btn-outline-warning"><i class="fas fa-edit"></i>Edit</a>
+
+    <a asp-action="Delete" asp-route-id="@word.Id" class="btn btn-outline-danger ml-1"><i class="fas fa-trash-alt"></i>Delete</a>
+</div>}
