@@ -1,13 +1,13 @@
 ﻿namespace TranslationApplication.Models
 {
-    public class Word
+    public class Question
     {
-        public int WordId { get; set; }
+        public int QuestionId { get; set; }
         public string Language1 { get; set; }
         public string Word1 { get; set; }
         public string Language2 { get; set; }
         public string Word2 { get; set; }
-        public int WordlistId { get; set; }
-        public virtual Wordlist Wordlist { get; set; }
+        public int QuizId { get; set; }
+        public virtual Quiz Quiz { get; set; }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model TranslationApplication.Models.Quiz
+
+<p>Quiz @Model.Id</p>
+
+@if (Model.Questions.Count == 0)
+{
+<p>There is no word to add to the list for these languages</p> }
+            else
+            {
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Quiz" asp-action="ValidateQuiz" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @foreach (var question in Model.Questions)
+            {
+<div class="form-group">
+    <label asp-for="@question.Word2" class="control-label">@question.Word1</label>
+    <input asp-for="@question.Word2" class="form-control" />
+    <span asp-validation-for="@question.Word2" class="text-danger"></span>
+</div>}
+
+            <button type="submit" class="btn btn-success">Finish</button>
+
+        </form>
+    </div>
+</div>}

@@ -51,8 +51,12 @@ namespace TranslationApplication.Controllers
             var wordList = new Wordlist()
             {
                 Id = 2,
-                Language1 = "Romanian",
-                Language2 = "English",
+                LanguagePair = new LanguagePair
+                {
+                    Language1 = "Romanian",
+                    Language2 = "English"
+                },
+
                 Words = new List<Word>()
                 {
                     new Word

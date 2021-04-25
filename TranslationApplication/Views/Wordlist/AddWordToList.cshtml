@@ -1,6 +1,6 @@
 ﻿@model TranslationApplication.Models.Wordlist
 
-@{ var counter = 1; @*Model.Words.Count;*@ }
+@{ var counter = 1; @*Model.Words.Count;*@ var words = Model.Words.ToList(); }
 <h1>My wordlist</h1>
 
 <p>@Model.Title</p>
@@ -12,14 +12,14 @@
         <form asp-controller="Wordlist" asp-action="AddWordToList" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.Words[counter].Language1" class="control-label">@Model.Language1</label>
-                <input asp-for="@Model.Words[counter].Language1." class="form-control" />
-                <span asp-validation-for="@Model.Words[counter].Language1" class="text-danger"></span>
+                <label asp-for="@words[counter].Language1" class="control-label">@Model.LanguagePair.Language1</label>
+                <input asp-for="@words[counter].Language1." class="form-control" />
+                <span asp-validation-for="@words[counter].Language1" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Words[counter].Language2" class="control-label">@Model.Language2</label>
-                <input asp-for="@Model.Words[counter].Language2." class="form-control" />
-                <span asp-validation-for="@Model.Words[counter].Language2" class="text-danger"></span>
+                <label asp-for="@words[counter].Language2" class="control-label">@Model.LanguagePair.Language2</label>
+                <input asp-for="@words[counter].Language2." class="form-control" />
+                <span asp-validation-for="@words[counter].Language2" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-success">Save</button>
             <a asp-action="Index" asp-controller="Home" class="btn btn-danger">Cancel</a>

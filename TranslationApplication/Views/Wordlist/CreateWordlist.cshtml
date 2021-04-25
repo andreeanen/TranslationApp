@@ -12,14 +12,14 @@
                 <span asp-validation-for="@Model.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Language1" class="control-label"></label>
-                <input asp-for="@Model.Language1" class="form-control" />
-                <span asp-validation-for="@Model.Language1" class="text-danger"></span>
+                <label asp-for="@Model.LanguagePair.Language1" class="control-label"></label>
+                <input asp-for="@Model.LanguagePair.Language1" class="form-control" />
+                <span asp-validation-for="@Model.LanguagePair.Language1" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Language2" class="control-label"></label>
-                <input asp-for="@Model.Language2" class="form-control" />
-                <span asp-validation-for="@Model.Language2" class="text-danger"></span>
+                <label asp-for="@Model.LanguagePair.Language2" class="control-label"></label>
+                <input asp-for="@Model.LanguagePair.Language2" class="form-control" />
+                <span asp-validation-for="@Model.LanguagePair.Language2" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-success">Save</button>
