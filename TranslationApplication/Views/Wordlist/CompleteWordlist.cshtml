@@ -3,6 +3,7 @@
 <p>Complete Wordlist</p>
 
 <p>@Model.Title</p>
+<p>From  @Model.LanguagePair.Language1 to @Model.LanguagePair.Language2</p>
 
 <a asp-controller="Wordlist" asp-action="AddWordToList" asp-route-id="@Model.Id" class="btn my-button btn-lg btn-success">Add new word</a>
 
@@ -10,7 +11,7 @@
 {
 <div>
     @word.Word1 = @word.Word2
-    <a asp-action="Edit" asp-route-id="@word.WordId" class="btn btn-outline-warning"><i class="fas fa-edit"></i>Edit</a>
+    <a asp-controller="Word" asp-action="Edit" asp-route-id="@word.WordId" class="btn btn-outline-warning"><i class="fas fa-edit"></i>Edit</a>
 
-    <a asp-action="Delete" asp-route-id="@word.WordId" class="btn btn-outline-danger ml-1"><i class="fas fa-trash-alt"></i>Delete</a>
+    <a asp-controller="Word" asp-action="Delete" asp-route-id="@word.WordId" class="btn btn-outline-danger ml-1"><i class="fas fa-trash-alt"></i>Delete</a>
 </div>}

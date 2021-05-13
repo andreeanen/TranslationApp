@@ -208,20 +208,33 @@ namespace TranslationApplication.Controllers
                 }
             }
 
-            var quizCorrect = new Quiz() { Id = 1 };
-            //quizCorrect.Questions.ToList().AddRange(wordsToShow);
 
-            var quiz = new Quiz() { Id = 2 };
-            foreach (var item in wordsToShow)
+
+
+            var quiz = new Quiz();
+            var quizCorrect = new Quiz();
+            foreach (var word in wordsToShow)
             {
-                var zz = new Question()
+                var question = new Question()
                 {
-                    Language1 = item.Language1,
-                    Word1 = item.Word1,
-                    Language2 = item.Language2,
-                    Word2 = ""
+                    Language1 = word.Language1,
+                    Word1 = word.Word1,
+                    Language2 = word.Language2,
+                    CorrectAnswer = word.Word2,
+                    Answer = ""
                 };
-                quiz.Questions.Add(zz);
+                quiz.Questions.Add(question);
+
+                var correctQuestion = new Question()
+                {
+                    Language1 = word.Language1,
+                    Word1 = word.Word1,
+                    Language2 = word.Language2,
+                    CorrectAnswer = word.Word2,
+                    Answer = ""
+                };
+                quizCorrect.Questions.Add(correctQuestion);
+
             }
 
 

@@ -10,7 +10,7 @@ using TranslationApplication.Data;
 namespace TranslationApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210425160356_initial")]
+    [Migration("20210513085625_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -258,6 +258,12 @@ namespace TranslationApplication.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorrectAnswer")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Language1")
                         .HasColumnType("nvarchar(max)");
 
@@ -268,9 +274,6 @@ namespace TranslationApplication.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Word1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Word2")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("QuestionId");

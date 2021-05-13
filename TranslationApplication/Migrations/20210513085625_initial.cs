@@ -203,7 +203,8 @@ namespace TranslationApplication.Migrations
                     Language1 = table.Column<string>(nullable: true),
                     Word1 = table.Column<string>(nullable: true),
                     Language2 = table.Column<string>(nullable: true),
-                    Word2 = table.Column<string>(nullable: true),
+                    CorrectAnswer = table.Column<string>(nullable: true),
+                    Answer = table.Column<string>(nullable: true),
                     QuizId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

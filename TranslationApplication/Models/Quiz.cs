@@ -11,6 +11,10 @@ namespace TranslationApplication.Models
         public virtual IList<Question> Questions { get; set; }
         public int Score { get; set; }
 
+        public Quiz()
+        {
+            Questions = new List<Question>();
+        }
     }
 
 }

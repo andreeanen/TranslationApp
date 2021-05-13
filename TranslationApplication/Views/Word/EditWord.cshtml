@@ -1,11 +1,17 @@
 ﻿@model TranslationApplication.Models.Word
-<p>New word</p>
 
+@{ ViewData["Title"] = "EditWord"; }
+
+<h1>EditWord</h1>
+
+<h4>Word</h4>
+<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="Wordlist" asp-action="AddWordToList" method="post">
+        <form asp-controller="Word" asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="WordlistId" />
+            <input type="hidden" asp-for="WordId" />
+
             <div class="form-group">
                 <label asp-for="Word1" class="control-label">@Model.Language1</label>
                 <input asp-for="Word1" class="form-control" />
@@ -16,8 +22,14 @@
                 <input asp-for="Word2" class="form-control" />
                 <span asp-validation-for="Word2" class="text-danger"></span>
             </div>
-            <input type="submit" value="Save" class="btn btn-success">
-            <a asp-action="Index" asp-controller="Home" class="btn btn-danger">Cancel</a>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
         </form>
     </div>
 </div>
+
+@*<div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@

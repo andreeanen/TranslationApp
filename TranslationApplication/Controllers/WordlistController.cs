@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using TranslationApplication.Data;
 using TranslationApplication.Models;
 
 namespace TranslationApplication.Controllers
@@ -7,19 +9,25 @@ namespace TranslationApplication.Controllers
     public class WordlistController : Controller
     {
 
+        private readonly ApplicationDbContext _dbContext;
+        public WordlistController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public IActionResult Wordlist()
         {
-
             return View();
         }
 
         public IActionResult ShowWordlist()
         {
-            var wordlist = new Wordlist()
-            {
-                Title = "Animals"
-            };
-            return View("ShowWordlist", wordlist);
+            var wordLists = _dbContext.Wordlists
+                .Include(x => x.LanguagePair)
+                .Include(x => x.Words)
+                .ToList();
+
+            return View("ShowWordlist", wordLists);
         }
 
         public IActionResult CreateWordlist()
@@ -31,51 +39,89 @@ namespace TranslationApplication.Controllers
         [HttpPost]
         public IActionResult CreateWordlist(Wordlist wordlist)
         {
-            return View("ShowWordlist", wordlist);
+            var newWordlist = new Wordlist()
+            {
+                Title = wordlist.Title,
+                LanguagePair = new LanguagePair()
+                {
+                    Language1 = wordlist.LanguagePair.Language1,
+                    Language2 = wordlist.LanguagePair.Language2
+                }
+            };
+
+            _dbContext.Wordlists.Add(newWordlist);
+            _dbContext.SaveChanges();
+
+            return View("CompleteWordlist", newWordlist);
         }
 
-
-        public IActionResult AddWordToList()
+        [HttpGet]
+        public IActionResult CompleteWordlist(int id)
         {
-            var wordlist = new Wordlist()
-            {
-                Title = "Animals",
 
+            var wordlist = _dbContext.Wordlists
+              .Include(x => x.LanguagePair)
+              .Include(x => x.Words)
+              .Where(x => x.Id == id)
+              .FirstOrDefault();
+
+            if (wordlist == null)
+            {
+                return NotFound("No wordlist with this id was found");
+            }
+
+            return View("CompleteWordlist", wordlist);
+        }
+
+        [HttpGet]
+        public IActionResult AddWordToList(int id)
+        {
+            var wordlist = _dbContext.Wordlists
+              .Include(x => x.LanguagePair)
+              .Include(x => x.Words)
+              .Where(x => x.Id == id)
+              .FirstOrDefault();
+
+            if (wordlist == null)
+            {
+                return NotFound("No wordlist with this id was found.");
+            }
+            var word = new Word()
+            {
+                WordlistId = id,
+                Language1 = wordlist.LanguagePair.Language1,
+                Language2 = wordlist.LanguagePair.Language2
             };
-            return View("AddWordToList", wordlist);
+
+            return View("AddWordToList", word);
         }
 
         [HttpPost]
-        public IActionResult AddWordToList(int id, Word word)
+        public IActionResult AddWordToList(Word word)
         {
-            var wordList = new Wordlist()
-            {
-                Id = 2,
-                LanguagePair = new LanguagePair
-                {
-                    Language1 = "Romanian",
-                    Language2 = "English"
-                },
+            var wordlistId = word.WordlistId;
 
-                Words = new List<Word>()
-                {
-                    new Word
-                    {
-                        Language1 = "Romanian",
-                        Language2 = "English",
-                        Word1 = "Pisica",
-                        Word2 = "Cat"
-                    },
-                    new Word
-                    {
-                        Language1 = "Romanian",
-                        Language2 = "English",
-                        Word1 = "Caine",
-                        Word2 = "Dog"
-                    }
-                }
-            };
-            return View("CompleteWordlist", wordList);
+            var wordlist = _dbContext.Wordlists
+                          .Include(x => x.LanguagePair)
+                          .Include(x => x.Words)
+                          .Where(x => x.Id == wordlistId)
+                          .FirstOrDefault();
+            if (wordlist == null)
+            {
+                return NotFound("No wordlist with this id was found");
+            }
+            if (word != null)
+            {
+                word.Language1 = wordlist.LanguagePair.Language1;
+                word.Language2 = wordlist.LanguagePair.Language2;
+                wordlist.Words.Add(word);
+                _dbContext.Update(wordlist);
+                _dbContext.SaveChanges();
+            }
+
+            return View("CompleteWordlist", wordlist);
         }
+
+
     }
 }

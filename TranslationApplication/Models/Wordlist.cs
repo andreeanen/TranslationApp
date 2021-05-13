@@ -11,5 +11,10 @@ namespace TranslationApplication.Models
         public ApplicationUser User { get; set; }
         public LanguagePair LanguagePair { get; set; }
         public virtual IList<Word> Words { get; set; }
+
+        public Wordlist()
+        {
+            Words = new List<Word>();
+        }
     }
 }

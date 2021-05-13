@@ -256,6 +256,12 @@ namespace TranslationApplication.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorrectAnswer")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Language1")
                         .HasColumnType("nvarchar(max)");
 
@@ -266,9 +272,6 @@ namespace TranslationApplication.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Word1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Word2")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("QuestionId");
