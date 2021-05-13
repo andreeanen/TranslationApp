@@ -4,25 +4,26 @@
 
 @if (Model.Questions.Count == 0)
 {
-    <p>There is no word to add to the list for these languages</p>
+    <p>There is no quiz to generate for these languages</p>
 }
 else
 {
+    <p>Translate from @Model.Questions.First().Language1 to @Model.Questions.First().Language2 </p>
     <div class="row">
         <div class="col-md-4">
             <form asp-controller="Quiz" asp-route-id="@Model.Id" asp-action="ValidateQuiz" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @foreach (var question in Model.Questions)
+                <input type="hidden" asp-for="Id" />
+
+                @for (int i = 0; i < Model.Questions.Count; i++)
                 {
                     <div class="form-group">
-                        <label asp-for="@question.Answer" class="control-label">@question.Word1</label>
-                        <input asp-for="@question.Answer" class="form-control" />
-                        <span asp-validation-for="@question.Answer" class="text-danger"></span>
+                        <label asp-for="@Model.Questions[i].Answer" class="control-label">@Model.Questions[i].Word1</label>
+                        <input asp-for="@Model.Questions[i].Answer" class="form-control" />
+                        <span asp-validation-for="@Model.Questions[i].Answer" class="text-danger"></span>
                     </div>
                 }
-
-                <button type="submit" class="btn btn-success">Finish</button>
-
+                <input type="submit" value="Finish" class="btn btn-success">
             </form>
         </div>
     </div>

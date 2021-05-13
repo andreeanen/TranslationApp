@@ -1,0 +1,23 @@
+﻿@model TranslationApplication.Models.Quiz
+
+<h1>QuizResult</h1>
+
+@if (Model.Questions.Count == 0)
+{
+    <p>No result to show</p>
+}
+else
+{
+    <p>Translate from @Model.Questions.First().Language1 to @Model.Questions.First().Language2 </p>
+    <div>
+        <p>You got @Model.Score points out of @Model.Questions.Count points</p>
+        @foreach (var question in Model.Questions)
+        {
+            <div>
+                <p>@question.Word1</p>
+                <p>Your answer: @question.Answer</p>
+                <p>Correct answer: @question.CorrectAnswer</p>
+            </div>
+        }
+    </div>
+}
