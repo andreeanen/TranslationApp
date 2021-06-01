@@ -1,23 +1,32 @@
 ﻿@model TranslationApplication.Models.Quiz
 
-<h1>QuizResult</h1>
+<h5 class="card-title title">Quiz result</h5>
 
 @if (Model.Questions.Count == 0)
 {
-    <p>No result to show</p>
-}
+    <p>No result to show</p> }
 else
 {
-    <p>Translate from @Model.Questions.First().Language1 to @Model.Questions.First().Language2 </p>
-    <div>
-        <p>You got @Model.Score points out of @Model.Questions.Count points</p>
+    <div class="btn my-button btn-lg btn-custom darkgreen_custom mb-4 border-0">
+        Congratulations: You got @Model.Score @(Model.Score==1? "point" :"points") out of @Model.Questions.Count points !
+    </div>
+    <div class="text-center">
         @foreach (var question in Model.Questions)
         {
-            <div>
-                <p>@question.Word1</p>
-                <p>Your answer: @question.Answer</p>
-                <p>Correct answer: @question.CorrectAnswer</p>
-            </div>
+            {
+                bool isCorrect = question.Answer.Trim().ToLower() == question.CorrectAnswer.Trim().ToLower();
+                <div class="mb-4 d-flex justify-content-center flex-column align-items-center">
+                    <div class="btn  w-50 lighblue-custom">@question.Word1</div>
+                    <div style="@(isCorrect ? "background-color:lightgreen": "background-color:lightsalmon")" class="btn mt-1 w-50">Answer: @question.Answer</div>
+                    @if (!isCorrect)
+                    {
+                        <div class="mt-1 w-50 btn" style="background-color: lightgreen">
+                            Correct: @question.CorrectAnswer
+                        </div>
+                    }
+                </div>
+            }
         }
+
     </div>
 }

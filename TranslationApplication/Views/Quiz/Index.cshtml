@@ -1,25 +1,19 @@
 ﻿@model List<TranslationApplication.Models.LanguagePair>
 
-<p>Generate Quiz</p>
-
-@*@foreach (var pair in Model)
-    {
-    <a asp-controller="Quiz" asp-action="ChooseLanguagePair" class="btn my-button btn-lg btn-success float-right "> @pair.Language1 to @pair.Language2 </a>
-                    <br />
-                                    <a asp-controller="Quiz" asp-action="ChooseLanguagePair" class="btn my-button btn-lg btn-success float-right "> @pair.Language2 to @pair.Language1 </a>
-     }*@
+<h5 class="card-title title">Generate quiz</h5>
 
 @foreach (var pair in Model)
 {
-<form asp-controller="Quiz" asp-action="GenerateQuiz" method="post">
-
-    <input type="hidden" name="languagePair" value="@pair.Language1&@pair.Language2" />
-    <button class="btn btn-primary" type="submit">@pair.Language1 to @pair.Language2</button>
-</form>
-
-                <form asp-controller="Quiz" asp-action="GenerateQuiz" method="post">
-
-                    <input type="hidden" name="languagePair" value="@pair.Language2&@pair.Language1" />
-                    <button class="btn btn-primary" type="submit">@pair.Language2 to @pair.Language1</button>
-                </form>
+    <div class="btn my-button btn-lg lighblue-custom btn-custom mb-4 d-flex">
+        <form asp-controller="Quiz" asp-action="GenerateQuiz" method="post">
+            <input type="hidden" name="languagePair" value="@pair.Language1&@pair.Language2" />
+            <button class="btn" type="submit">@pair.Language1 to @pair.Language2</button>
+        </form>
+    </div>
+    <div class="btn my-button btn-lg lighblue-custom btn-custom mb-4 d-flex">
+        <form asp-controller="Quiz" asp-action="GenerateQuiz" method="post">
+            <input type="hidden" name="languagePair" value="@pair.Language2&@pair.Language1" />
+            <button class="btn" type="submit">@pair.Language2 to @pair.Language1</button>
+        </form>
+    </div>
 }

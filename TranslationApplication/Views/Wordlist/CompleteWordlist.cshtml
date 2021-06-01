@@ -1,17 +1,26 @@
 ﻿@model TranslationApplication.Models.Wordlist
 
-<p>Complete Wordlist</p>
+<h5 class="card-title title">@Model.Title</h5>
 
-<p>@Model.Title</p>
-<p>From  @Model.LanguagePair.Language1 to @Model.LanguagePair.Language2</p>
+<div class="btn my-button btn-lg btn-custom lightgreen_custom d-flex mb-4 border-0 text-center">
+    Translate from  @Model.LanguagePair.Language1 to @Model.LanguagePair.Language2
+</div>
 
-<a asp-controller="Wordlist" asp-action="AddWordToList" asp-route-id="@Model.Id" class="btn my-button btn-lg btn-success">Add new word</a>
+<a asp-controller="Wordlist" asp-action="AddWordToList" asp-route-id="@Model.Id" class="btn my-button btn-lg btn-custom darkgreen_custom d-flex border-0 mb-4">
+    <div style="color:forestgreen">
+        <i class="fas fa-plus-circle fa-2x"></i>
+    </div>
+    <div class="m-auto">Add new word</div>
+</a>
 
 @foreach (var word in Model.Words)
 {
-<div>
-    @word.Word1 = @word.Word2
-    <a asp-controller="Word" asp-action="Edit" asp-route-id="@word.WordId" class="btn btn-outline-warning"><i class="fas fa-edit"></i>Edit</a>
-
-    <a asp-controller="Word" asp-action="Delete" asp-route-id="@word.WordId" class="btn btn-outline-danger ml-1"><i class="fas fa-trash-alt"></i>Delete</a>
+<div class="btn my-button btn-lg btn-custom lightgreen_custom d-flex mb-2 border-0 justify-content-around">
+    <div>
+        @word.Word1 = @word.Word2
+    </div>
+    <div>
+        <a asp-controller="Word" asp-action="Edit" asp-route-id="@word.WordId" class="btn btn-outline-info"><i class="fas fa-edit"></i></a>
+        <a asp-controller="Word" asp-action="Delete" asp-route-id="@word.WordId" class="btn btn-outline-danger ml-1"><i class="fas fa-trash-alt"></i></a>
+    </div>
 </div>}

@@ -1,13 +1,28 @@
 ﻿@{ ViewData["Title"] = "Home Page"; }
 
 
-<div class="card" style="width: 18rem;">
+<div class="card">
     <div class="card-body">
-        <h5 class="card-title">Welcome to LearnIt</h5>
-        <a asp-controller="Wordlist" asp-action="CreateWordlist" class="btn my-button btn-lg btn-success float-right ">Create a new wordlist</a>
+        <h5 class="card-title title">Welcome to LearnIt</h5>
+        <a asp-controller="Wordlist" asp-action="CreateWordlist" class="btn my-button btn-lg lighblue-custom btn-custom mb-4 d-flex">
+            <div style="color:forestgreen">
+                <i class="fas fa-plus-circle fa-2x"></i>
+            </div>
+            <div class="m-auto">Create a new wordlist</div>
+        </a>
         <br />
-        <a asp-controller="Wordlist" asp-action="ShowWordlist" class="btn my-button btn-lg btn-success float-right ">Show my wordlists</a>
+        <a asp-controller="Wordlist" asp-action="ShowWordlist" class="btn my-button btn-lg btn-custom lightgreen_custom d-flex mb-4 border-0">
+            <div style="color:forestgreen">
+                <i class="fas fa-bars fa-2x"></i>
+            </div>
+            <div class="m-auto">Show my wordlists</div>
+        </a>
         <br />
-        <a asp-controller="Quiz" asp-action="Index" class="btn my-button btn-lg btn-success float-right ">Generate a quiz</a>
+        <a asp-controller="Quiz" asp-action="Index" class="btn my-button btn-lg btn-custom darkgreen_custom d-flex border-0">
+            <div style="color:forestgreen">
+                <i class="fas fa-question-circle fa-2x"></i>
+            </div>
+            <div class="m-auto">Generate a quiz</div>
+        </a>
     </div>
 </div>
